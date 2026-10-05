@@ -86,7 +86,7 @@ function Logo({ light = false }: { light?: boolean }) {
 function Index() {
   useReveal();
   const [course, setCourse] = useState("");
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<{ name?: string; phone?: string; course?: string }>({});
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -95,7 +95,7 @@ function Index() {
     if (!r.success) {
       const errs: Record<string, string> = {};
       r.error.issues.forEach((i) => (errs[String(i.path[0])] = i.message));
-      setErrors(errs);
+      setErrors(errs as { name?: string; phone?: string; course?: string });
       return;
     }
     setErrors({});
